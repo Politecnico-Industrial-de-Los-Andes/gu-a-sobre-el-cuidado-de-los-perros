@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+<title>Cuidados Recomendados</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#020617;
+  --bg2:#0f172a;
+  --card:rgba(255,255,255,.08);
+  --card2:rgba(255,255,255,.06);
+  --txt:#f8fafc;
+  --muted:#cbd5e1;
+  --sky:#38bdf8;
+  --cyan:#22d3ee;
+  --green:#4ade80;
+  --yellow:#fbbf24;
+  --red:#f87171;
+  --violet:#a78bfa;
+  --shadow:0 16px 40px rgba(0,0,0,.35);
+  --radius:24px;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(circle at top, rgba(56,189,248,.12), transparent 35%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color:var(--txt);
+  overflow-x:hidden;
+}
+
+img{
+  display:block;
+  width:100%;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+::selection{
+  background:rgba(56,189,248,.35);
+}
+
+/* PROGRESS BAR */
+.progress-wrap{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:5px;
+  background:rgba(255,255,255,.08);
+  z-index:9999;
+}
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg, var(--sky), var(--cyan), var(--violet));
+  box-shadow:0 0 18px rgba(56,189,248,.55);
+}
+
+/* HERO */
+.hero{
+  min-height:100svh;
+  padding:32px 18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(2,6,23,.35), rgba(2,6,23,.88)),
+    url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1400&q=80') center/cover;
+}
+
+.hero-card{
+  width:min(100%, 760px);
+  padding:28px 20px;
+  border-radius:32px;
+  background:rgba(2,6,23,.52);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  box-shadow:var(--shadow);
+  animation:heroIn .9s ease both;
+}
+
+@keyframes heroIn{
+  from{opacity:0; transform:translateY(20px) scale(.96);}
+  to{opacity:1; transform:translateY(0) scale(1);}
+}
+
+.hero-badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(56,189,248,.15);
+  border:1px solid rgba(56,189,248,.28);
+  color:#e0f2fe;
+  font-size:.82rem;
+  margin-bottom:14px;
+}
+
+.hero h1{
+  font-size:clamp(2rem, 7vw, 4rem);
+  line-height:1.05;
+  margin-bottom:10px;
+  font-weight:800;
+  letter-spacing:-.03em;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:clamp(.98rem, 3.5vw, 1.12rem);
+  line-height:1.6;
+  max-width:50ch;
+  margin:0 auto;
+}
+
+.hero-actions{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  color:var(--txt);
+  font-size:.88rem;
+  min-height:42px;
+}
+
+/* NAV MOBILE */
+.quick-nav{
+  position:sticky;
+  top:5px;
+  z-index:999;
+  padding:10px 12px 4px;
+  backdrop-filter:blur(10px);
+  background:linear-gradient(180deg, rgba(2,6,23,.92), rgba(2,6,23,.72));
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.quick-nav .row{
+  display:flex;
+  gap:10px;
+  overflow:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  padding-bottom:6px;
+}
+.quick-nav .row::-webkit-scrollbar{display:none;}
+
+.quick-nav a{
+  flex:0 0 auto;
+  white-space:nowrap;
+  font-size:.85rem;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.08);
+  transition:.2s ease;
+}
+.quick-nav a:active{
+  transform:scale(.98);
+  background:rgba(56,189,248,.18);
+  border-color:rgba(56,189,248,.35);
+}
+
+/* SECTIONS */
+.section{
+  padding:22px 14px 8px;
+}
+
+.section-inner{
+  width:min(100%, 1100px);
+  margin:0 auto;
+  padding:18px 14px 20px;
+  border-radius:28px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:var(--shadow);
+  opacity:0;
+  transform:translateY(24px);
+  transition:.75s ease;
+}
+
+.section.show .section-inner{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.section-head{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:16px;
+  text-align:center;
+}
+
+.section-head h2{
+  font-size:clamp(1.35rem, 5vw, 2rem);
+  line-height:1.15;
+}
+
+.section-head p{
+  color:var(--muted);
+  font-size:.94rem;
+  line-height:1.5;
+}
+
+.section.heroic .section-inner{
+  border-top:4px solid rgba(56,189,248,.75);
+}
+.section.feed .section-inner{
+  border-top:4px solid rgba(74,222,128,.75);
+}
+.section.foods .section-inner{
+  border-top:4px solid rgba(248,113,113,.8);
+}
+.section.deworm .section-inner{
+  border-top:4px solid rgba(167,139,250,.8);
+}
+.section.vax .section-inner{
+  border-top:4px solid rgba(251,191,36,.85);
+}
+.section.spay .section-inner{
+  border-top:4px solid rgba(34,211,238,.8);
+}
+.section.life .section-inner{
+  border-top:4px solid rgba(96,165,250,.85);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:14px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:22px;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 12px 25px rgba(0,0,0,.22);
+  transform:translateZ(0);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.card:active{
+  transform:scale(.985);
+}
+
+.card .img-wrap{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:rgba(255,255,255,.05);
+}
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .45s ease, filter .45s ease;
+}
+
+.card .overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, transparent 30%, rgba(2,6,23,.72) 100%),
+    linear-gradient(135deg, rgba(56,189,248,.0), rgba(56,189,248,.10));
+  opacity:.95;
+  pointer-events:none;
+}
+
+.card:hover img{
+  transform:scale(1.06);
+}
+
+.card-body{
+  padding:14px 14px 15px;
+}
+
+.card h3{
+  font-size:1.02rem;
+  margin-bottom:6px;
+  line-height:1.2;
+}
+
+.card p{
+  font-size:.92rem;
+  color:#e2e8f0;
+  line-height:1.55;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:.78rem;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+  color:#f8fafc;
+}
+
+.tag.sky{background:rgba(56,189,248,.14); border-color:rgba(56,189,248,.24);}
+.tag.green{background:rgba(74,222,128,.14); border-color:rgba(74,222,128,.22);}
+.tag.red{background:rgba(248,113,113,.14); border-color:rgba(248,113,113,.22);}
+.tag.yellow{background:rgba(251,191,36,.14); border-color:rgba(251,191,36,.22);}
+.tag.violet{background:rgba(167,139,250,.14); border-color:rgba(167,139,250,.22);}
+.tag.cyan{background:rgba(34,211,238,.14); border-color:rgba(34,211,238,.22);}
+
+details.more{
+  margin-top:10px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+
+details.more summary{
+  list-style:none;
+  cursor:pointer;
+  padding:11px 12px;
+  font-size:.86rem;
+  color:#e2e8f0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+details.more summary::-webkit-details-marker{display:none;}
+details.more summary span{
+  opacity:.82;
+}
+details.more .more-content{
+  padding:0 12px 12px;
+  color:#cbd5e1;
+  font-size:.86rem;
+  line-height:1.55;
+}
+
+/* SPECIAL LIST CARDS */
+.list-card{
+  padding:16px;
+}
+
+.list-card .big{
+  font-size:1.12rem;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.list{
+  display:grid;
+  gap:10px;
+  margin-top:10px;
+}
+
+.list-item{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:11px 12px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.dot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  margin-top:6px;
+  flex:0 0 11px;
+  box-shadow:0 0 0 4px rgba(255,255,255,.06);
+}
+.dot.green{background:var(--green);}
+.dot.red{background:var(--red);}
+.dot.sky{background:var(--sky);}
+.dot.yellow{background:var(--yellow);}
+.dot.violet{background:var(--violet);}
+
+/* FOOTER */
+footer{
+  padding:28px 16px 40px;
+  text-align:center;
+  color:#e2e8f0;
+  font-size:.94rem;
+  line-height:1.7;
+}
+
+.footer-card{
+  width:min(100%, 1100px);
+  margin:0 auto;
+  padding:18px 16px;
+  border-radius:24px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:var(--shadow);
+}
+
+/* MOBILE */
+@media (max-width: 640px){
+  .hero{
+    padding:20px 14px 18px;
+  }
+
+  .hero-card{
+    padding:22px 16px;
+    border-radius:26px;
+  }
+
+  .section{
+    padding:16px 10px 6px;
+  }
+
+  .section-inner{
+    padding:14px 12px 16px;
+    border-radius:22px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .card h3{
+    font-size:1rem;
+  }
+
+  .card p{
+    font-size:.9rem;
+  }
+
+  .quick-nav{
+    top:4px;
+    padding:8px 10px 4px;
+  }
+
+  .pill{
+    width:100%;
+  }
+}
+
+/* Slightly bigger cards on medium screens */
+@media (min-width: 641px) and (max-width: 980px){
+  .grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<section class="hero" id="inicio">
+  <div class="hero-card">
+    <div class="hero-badge">Tu perro merece lo mejor, y aquí te ayudamos a dárselo</div>
+    <h1>Cuidados Esenciales para tu Compañero Canino</h1>
+    <p>Porque tu perro es más que una mascota, es parte de tu familia</p>
+    <div class="hero-actions">
+      <a class="pill" href="#alimentacion">🍼 Su alimentación</a>
+      <a class="pill" href="#vacunacion">💉 Su bienestar</a>
+      <a class="pill" href="#vida">🐾 Cada etapa cuenta</a>
+    </div>
+  </div>
+</section>
+
+<nav class="quick-nav" aria-label="Navegación rápida">
+  <div class="row">
+    <a href="#alimentacion">Nutrición</a>
+    <a href="#alimentos">Tipos de comida</a>
+    <a href="#desparasitacion">Desparasitación</a>
+    <a href="#vacunacion">Vacunas</a>
+    <a href="#esterilizacion">Esterilización</a>
+    <a href="#vida">Etapas de vida</a>
+  </div>
+</nav>
+
+<section class="section heroic" id="alimentacion">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>🍼 Alimentación según su etapa</h2>
+      <p>Cada etapa es única, y su alimentación también</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1575383095193-52195a64e3a6?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Cachorro recién nacido">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>0–20 días</h3>
+          <p>Solo leche materna (lo mejor para su desarrollo)</p>
+          <div class="meta">
+            <span class="tag sky">Cada 2–3 horas</span>
+            <span class="tag cyan">5–6 tomas al día</span>
+          </div>
+          <details class="more">
+            <summary>Opciones si no está con su mamá <span>Ver más +</span></summary>
+            <div class="more-content">
+              Usar leche maternizada o fórmula láctea para cachorros. No usar leche de vaca. Se puede administrar con biberón o jeringa especial bajo indicación.
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1548658166-136d9f6a7e76?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>18–30 días</h3>
+          <p>Empieza con papillas suaves (concentrado + agua tibia) y leche</p>
+          <div class="meta">
+            <span class="tag violet">4–5 veces al día</span>
+            <span class="tag sky">Transición suave</span>
+          </div>
+          <details class="more">
+            <summary>Detalles <span>Ver más +</span></summary>
+            <div class="more-content">
+              La textura debe ser blanda para facilitar el cambio de la leche al alimento sólido. La transición debe ser progresiva.
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1699726165307-862e978fe3a1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Cachorro con comida blanda">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>30–60 días</h3>
+          <p>Empieza con concentrado blando y alimentos suaves fáciles de digerir</p>
+          <div class="meta">
+            <span class="tag yellow">3–4 veces al día</span>
+            <span class="tag green">Se adapta poco a poco</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1601979031925-424e53b6caaa?auto=format&fit=crop&w=900&q=80" alt="Cachorro creciendo">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>2–6 meses</h3>
+          <p>Alimentos balanceados rico en proteínas para un crecimiento fuerte</p>
+          <div class="meta">
+            <span class="tag green">3 veces al día</span>
+            <span class="tag cyan">Crecimiento activo</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=662&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Perro joven comiendo">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>6–12 meses</h3>
+          <p>Alimentación equilibrada para mantenerlo sano y en su peso ideal</p>
+          <div class="meta">
+            <span class="tag yellow">2 veces al día</span>
+            <span class="tag violet">Control de porciones</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section foods" id="alimentos">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>Lo que tu perro puede y no puede comer 🐶🥣</h2>
+      <p>Te ayudamos a elegir lo mejor para tu peludo y a evitar lo que puede hacerle daño</p>
+    </div>
+
+    <div class="grid">
+      <article class="card list-card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1714068691256-cd3d65f97795?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Alimentos no permitidos">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>❌ Prohibidos ❌</h3>
+          <p>Estos alimentos pueden hacerle daño a tu perro, así que es mejor mantenerlos lejos</p>
+          <div class="list">
+            <div class="list-item"><span class="dot red"></span><span>Chocolate</span></div>
+            <div class="list-item"><span class="dot red"></span><span>Cebolla</span></div>
+            <div class="list-item"><span class="dot red"></span><span>Uvas</span></div>
+            <div class="list-item"><span class="dot red"></span><span>Alcohol y cafeína</span></div>
+            <div class="list-item"><span class="dot red"></span><span>Huesos cocidos</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card list-card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1554830072-52d78d0d4c18?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Alimentos permitidos">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>✅ Permitidos ✅</h3>
+          <p>Opciones seguras que puedes darle de vez en cuando y en pequeñas cantidades</p>
+          <div class="list">
+            <div class="list-item"><span class="dot green"></span><span>Fresas y plátano</span></div>
+            <div class="list-item"><span class="dot green"></span><span>Manzana y zanahoria</span></div>
+            <div class="list-item"><span class="dot green"></span><span>Yogurt natural</span></div>
+            <div class="list-item"><span class="dot green"></span><span>Huevo</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section deworm" id="desparasitacion">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>💊 Desparasitación</h2>
+      <p>Un control constante ayuda a mantener al cachorro sano.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/8473725/pexels-photo-8473725.jpeg?_gl=1*z69b5g*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU4ODY5MjQkbzEkZzEkdDE3NzU4ODcyMzUkajU5JGwwJGgw?w=900&q=80" alt="Medicamento veterinario">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Etapa inicial</h3>
+          <p>Cada 15 días desde las 2–3 semanas hasta los 3 meses.</p>
+          <div class="meta">
+            <span class="tag violet">Control frecuente</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/34805017/pexels-photo-34805017.jpeg?_gl=1*10ertsu*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU4ODY5MjQkbzEkZzEkdDE3NzU4ODczNDckajE2JGwwJGgw?w=900&q=80" alt="Perro en revisión">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Después</h3>
+          <p>Luego 1 vez al mes hasta los 6 meses.</p>
+          <div class="meta">
+            <span class="tag sky">Mantenimiento mensual</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section vax" id="vacunacion">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>💉 Vacunación para cuidar a tu peludo</h2>
+      <p>Todo lo que necesitas saber para proteger a tu perro y mantenerlo sano en cada etapa</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/36111944/pexels-photo-36111944.jpeg?_gl=1*g1yotc*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU4ODY5MjQkbzEkZzEkdDE3NzU4ODc2MzQkajU5JGwwJGgw?w=900&q=80" alt="Veterinario vacunando">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>¿Por qué son tan importantes?</h3>
+          <p>Las vacunas ayudan a proteger a tu perro de enfermedades graves como el parvovirus, moquillo y la rabia</p>
+          <details class="more">
+            <summary>Conoce más +<span></span></summary>
+            <div class="more-content">
+              Además, fortalecen sus defensas, lo ayudan a vivir más sano y previenen contagios a otros animales
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/5863310/pexels-photo-5863310.jpeg?_gl=1*1q9nx3*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU4ODY5MjQkbzEkZzEkdDE3NzU4ODc5MjgkajU5JGwwJGgw?w=900&q=80" alt="Vacunas veterinarias">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Esquema de vacunas</h3>
+          <p>Estas vacunas son clave para mantener a tu perro protegido:<br>- Bivalente: Moquillo y parvovirus<br>- Pentavalente: Moquillo, parvovirus, hepatitis, parainfluenza y leptospirosis<br>- Antirrábica: Obligatoria.</p>
+          <details class="more">
+            <summary>¿Cómo es el proceso?<span>Ver detalles +</span></summary>
+            <div class="more-content">
+              Primero se aplican las vacunas básicas y luego los refuerzos. El veterinario ajusta el esquema según su edad, salud y entorno
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/29509496/pexels-photo-29509496.jpeg?_gl=1*1n4a6ls*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU4ODY5MjQkbzEkZzEkdDE3NzU4ODgxNTQkajE1JGwwJGgw?w=900&q=80" alt="Calendario de vacunación">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Calendario de vacunas</h3>
+          <p><strong>- 6 semanas:</strong> Primera vacuna<br><strong>- 8 semanas:</strong> Refuerzo<br><strong>- 12 semanas:</strong> Pentavalente<br><strong>- 16 semanas:</strong> Antirrábica<br><strong>- Anual:</strong> Refuerzos generales</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/5256722/pexels-photo-5256722.jpeg?_gl=1*beak2n*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU4ODY5MjQkbzEkZzEkdDE3NzU4ODgzNTgkajU5JGwwJGgw?w=900&q=80" alt="Perro en control veterinario">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Recomendación importante</h3>
+          <p>Evita sacar a tu cachorro a lugares de alto riesgo hasta completar su esquema de vacunas</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section spay" id="esterilizacion">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>✂️ Esterilización y cuidado responsable</h2>
+      <p>Una decisión importante para cuidar su salud y darle una mejor calidad de vida</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/13085581/pexels-photo-13085581.jpeg?_gl=1*jc6wyz*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU5Nzg0ODkkbzUkZzEkdDE3NzU5NzkwMTgkajExJGwwJGgw?w=900&q=80" alt="Cachorro relajado">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <p>El mejor momento suele ser entre los <strong>4 y 6 meses</strong>.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1586015512653-9c6a3416ba5c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Atención veterinaria">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <p>Ayuda a prevenir enfermedades como tumores e infecciones</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://plus.unsplash.com/premium_photo-1661724637207-be0c86fa6269?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Perro caminando">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <p>Puede ayudar a mejorar su comportamiento y reducir la agresividad</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/32687834/pexels-photo-32687834.jpeg?_gl=1*14lzwtq*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU5Nzg0ODkkbzUkZzEkdDE3NzU5Nzk1NjEkajU5JGwwJGgw?w=900&q=80" alt="Perro feliz">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <p>Puede ayudar a que viva más años y evita la sobrepoblación</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section life" id="vida">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>🐾 Etapas de Vida</h2>
+      <p>Un resumen del crecimiento de tu mejor amigo</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1760210042929-70a2f7706363?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=900&q=80" alt="Cachorro">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Cachorro</h3>
+          <p>Amor, vacunas y aprendizaje:<br>- Empieza su vida con cuidados, juegos y mucha socialización</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://cdn.pixabay.com/photo/2021/12/17/19/16/dog-6877287_1280.jpg?w=900&q=80" alt="Perro adulto">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Adulto</h3>
+          <p>Cuidado y prevención:<br>- Alimentación balanceada, ejercicio y chequeos para mantenerlo sano</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img-wrap">
+          <img loading="lazy" src="https://images.pexels.com/photos/6234624/pexels-photo-6234624.jpeg?_gl=1*940pj1*_ga*MTI4NDk0NzIyMy4xNzc1ODg2OTI0*_ga_8JE65Q40S6*czE3NzU5ODM2NjckbzYkZzEkdDE3NzU5ODQ0MDEkajU5JGwwJGgw?w=900&q=80" alt="Perro anciano">
+          <div class="overlay"></div>
+        </div>
+        <div class="card-body">
+          <h3>Anciano</h3>
+          <p>Más atención y cariño:<br>- Revisiones frecuentes y todo el amor que siempre te dio</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-card">
+    ❤️ “Hasta que no hayas amado a un animal, una parte de tu alma permanece dormida” ❤️
+  </div>
+</footer>
+
+<script>
+const sections = document.querySelectorAll('.section');
+const progressBar = document.getElementById('progressBar');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.14 });
+
+sections.forEach(sec => observer.observe(sec));
+
+function updateProgress() {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+}
+
+window.addEventListener('scroll', updateProgress, { passive: true });
+updateProgress();
+</script>
+</body>
+</html>
